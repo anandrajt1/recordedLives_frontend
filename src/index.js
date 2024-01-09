@@ -1,13 +1,71 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
+import Root from "./routes/Root";
+import ErrorPage from "./ErrorPage";
+import AboutPage from './routes/AboutPage';
+import SignUpPage from './routes/SignUpPage';
+import LoginPage from './routes/LoginPage';
+import IndexPage from './routes/IndexPage';
+import BatchPage ,{loader as batchPageLoader} from './routes/BatchPage';
+import HomePage ,{ loader as homePageLoader } from './routes/HomePage';
+import AddSession from './routes/AddSession';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root/>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path:"/",
+        element:<IndexPage/>
+
+      },
+      {
+        path:"/batches",
+        element:<HomePage/>,
+        loader: homePageLoader
+
+      },
+      {
+        path:"/about",
+        element: <AboutPage/>
+      },
+      {
+        path:"/batches/:batchId",
+        element:<BatchPage/>,
+        loader:batchPageLoader
+      },
+      {
+        path:'/signup',
+        element:<SignUpPage/>
+      },
+      {
+        path:'/login',
+        element:<LoginPage/>
+      },
+      {
+        path:'/add-session',
+        element:<AddSession/>
+      }
+    ],
+  },
+  
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
+  
+   
   </React.StrictMode>
 );
 

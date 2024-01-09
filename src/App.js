@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const[batches,setBatches]=useState([
+    {
+      batchName:'E2'
+    },
+    {
+      batchName:'E23'
+    },
+    {
+      batchName:'E28'
+    },
+    {
+      batchName:'E26'
+    },
+    {
+      batchName:'E27'
+    },
+    {
+      batchName:'E18'
+    }
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+  <main>
+   <h2>Batches</h2>
+
+<ul className="batchList"> 
+   {
+   batches.map((batch,index)=>{
+    return(
+      <li className='batch'>{batch.batchName}</li>
+    )
+   })
+   }
+
+
+</ul>
+  
+</main>
+   </>
   );
 }
 
